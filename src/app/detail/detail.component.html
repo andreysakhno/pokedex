@@ -1,0 +1,52 @@
+<div *ngIf="showDetails" class="card mb-12 bg-light">
+  <ng-container *ngIf="pokemonDetail.imageURL && pokemonDetail.name">
+    <img class="card-img-top" [src]="pokemonDetail.imageURL" [alt]="pokemonDetail.name | capitalize" />
+  </ng-container>
+  <div class="card-body">
+    <ng-container *ngIf="pokemonDetail.id && pokemonDetail.name">
+        <h4 class="card-title text-center">{{ pokemonDetail.name | capitalize }} {{ pokemonDetail.id | numberformat }}</h4>
+    </ng-container>
+    <table class="table table-bordered">
+      <tbody>
+      <tr>
+        <th align="center">Type</th>
+        <td align="center">
+          <span *ngIf="pokemonDetail.types">{{ pokemonDetail.types.join(', ') }}</span>
+        </td>
+      </tr>
+      <tr>
+        <th align="center">Attack</th>
+        <td align="center">{{pokemonDetail.attack}}</td>
+      </tr>
+      <tr>
+        <th align="center">Defense</th>
+        <td align="center">{{pokemonDetail.defense}}</td>
+      </tr>
+      <tr>
+        <th align="center">HP</th>
+        <td align="center">{{pokemonDetail.hp}}</td>
+      </tr>
+      <tr>
+        <th align="center">SP Attack</th>
+        <td align="center">{{pokemonDetail.spAttack}}</td>
+      </tr>
+      <tr>
+        <th align="center">SP Defense</th>
+        <td align="center">{{pokemonDetail.spDefense}}</td>
+      </tr>
+      <tr>
+        <th align="center">Speed</th>
+        <td align="center">{{pokemonDetail.speed}}</td>
+      </tr>
+      <tr>
+        <th align="center">Weight</th>
+        <td align="center">{{pokemonDetail.weight}}</td>
+      </tr>
+      <tr>
+        <th align="center">Total Moves</th>
+        <td align="center">{{pokemonDetail.totalMoves}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

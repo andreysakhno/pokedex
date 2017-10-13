@@ -1,0 +1,10 @@
+.table td, .table th {
+  padding: .3rem;
+  font-size: 0.8rem;
+  text-align: center;
+  width: 50%;
+}
+.card-img-top {
+  width: 40%;
+  margin: 0 auto;
+}

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col col-sm-12 col-lg-8">
+    <div class="row">
+      <div class="col-sm-6 col-lg-3 pokemone-card"
+           *ngFor="let pokemon of allStoredPokemons"
+           (click)="selectPokemon(pokemon)"
+      >
+        <div class="card mb-3" [ngClass]="[ pokemon.isSelected ? 'text-white bg-success' : 'bg-light']" >
+          <ng-container *ngIf="pokemon.imageURL">
+            <img class="card-img-top"
+                 [src]="pokemon.imageURL"
+                 [alt]="pokemon.name | capitalize" />
+          </ng-container>
+
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ pokemon.name | capitalize }}</h5>
+            <div class="types">
+              <div
+                class="type type-{{ type }}"
+                *ngFor="let type of pokemon.types">
+                {{ type }}
+              </div>
+            </div>
+            <div class="like">
+              <a (click)="removeFromLikeList(pokemon); $event.stopPropagation();" >
+                <span [ngClass]="[ pokemon.isLiked ? 'fa fa-heart' : 'fa fa-heart-o' ]"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+          <button type="button"
+                 class="btn btn-primary btn-lg btn-block"
+                 (click)="showDetails()"
+                 [hidden]="isLoading"
+                 [disabled]="disabled"
+          >Load More</button>
+    </div>
+  </div>
+  <div class="col col-sm-12 col-lg-4">
+     <div class="row align-items-center">
+       <app-detail class="col col-sm-12"></app-detail>
+     </div>
+  </div>
+</div>
+<br/><br/><br/>
