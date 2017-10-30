@@ -32,6 +32,7 @@ export class LikeComponent implements OnInit {
     this.progressService.start();
     this.allStoredPokemons = this.lsPokemonsService.getAll();
     this.isLoading = false;
+    this.disabled = true;
     this.progressService.done();
   }
 

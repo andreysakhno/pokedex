@@ -23,14 +23,13 @@ export class LocalStorageService {
   }
 
   add(pokemon: Pokemon) {
-    pokemon.isSelected = false;
     this.pokemonInStorage.push(pokemon);
     this.update();
   }
 
   remove(pokemon: Pokemon) {
     let n = pokemon.id-1;
-    this.pokemonInStorage = this.pokemonInStorage.filter(function(item, index) {
+    this.pokemonInStorage = this.pokemonInStorage.filter(function(item) {
       return (item.id !== pokemon.id ) ? item : null;
     });
     this.update();

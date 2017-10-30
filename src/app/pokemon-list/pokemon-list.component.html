@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="like">
-              <a (click)="addRemoveLikeList(pokemon); $event.stopPropagation();" >
+              <a (click)="$event.stopPropagation(); addRemoveLikeList(pokemon);" >
                 <span [ngClass]="[ pokemon.isLiked ? 'fa fa-heart' : 'fa fa-heart-o' ]"></span>
               </a>
             </div>

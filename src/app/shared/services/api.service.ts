@@ -16,21 +16,19 @@ export class ApiService {
   ) {}
 
   getPokemons(): Promise<Pokemon[]> {
-    const url: string = "http://pokeapi.co/api/v2/pokemon?limit=12";
+    const url: string = "https://pokeapi.co/api/v1/pokemon?limit=12";
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
     return this.http.get(url)
       .toPromise()
       .then(response => {
-         return response.json().results.map((item) => {
-              const id = this.getId(item.url),
+         return response.json().objects.map((item) => {
+              const id = item.national_id,
                     name = item.name,
-                    url = item.url,
-                    types = [];
-
-              this.getTypes(item.url)
-                .then((type) => {
-                  type.forEach((item, i) => types[i] = item )
-                })
-                .catch(this.handleError);
+                    url = `https://pokeapi.co/api/v2/pokemon/${id}`,
+                    types = item.types.map(t => t.name);
 
               let tmpObj: Pokemon = {
                 id,
@@ -55,7 +53,7 @@ export class ApiService {
       .toPromise()
       .then(response => response.json())
       .then(items => {
-         let id = this.getId(url),
+         let id = items.id,
              name = items.name,
              imageURL = this.getImageUrl(id),
              types = items.types.map(t => t.type.name),
@@ -63,7 +61,7 @@ export class ApiService {
              speed, attack, defense, hp, spAttack, spDefense,
              totalMoves = Object.keys(items.moves).length;
          items.stats.map(s => {
-           switch(s.stat.name){
+           switch(s.stat.name) {
              case 'speed':
                speed = s.base_stat;
                break;
@@ -110,7 +108,7 @@ export class ApiService {
   }
 
   private getImageUrl(id: number): string {
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
+      return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
   }
 
   private handleError(error: any): Promise<any> {
